@@ -11,7 +11,7 @@ import pandas as pd
 # Data Visualisation
 import matplotlib.pyplot as plt 
 import seaborn as sns
-# from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression
 
 hours_studied=[1.5,3.0,4.5,6.0,7.5]
 test_scores=[55,65,75,85,95]
@@ -62,3 +62,19 @@ else:
     predicted_test_score=slope_of_line*X + intercept_of_line
     print(f"predicted test score is {predicted_test_score}")
 
+# Creating and training regression model
+model=LinearRegression()
+model.fit(np.array(hours_studied).reshape(-1,1),test_scores)
+
+# Predicting a test score using the regression model
+Y_predicted=model.predict(np.array(hours_studied).reshape(-1,1))
+
+# Visualising the regression line
+
+plt.scatter(hours_studied,test_scores,color="blue",label="Data Points")
+plt.plot(hours_studied,Y_predicted, color="red", label="Regression Line")
+plt.xlabel("Hours Studied")
+plt.ylabel("Test Scores")
+plt.title("Linear Regression")
+plt.legend()
+plt.show()
